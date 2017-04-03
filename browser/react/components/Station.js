@@ -3,13 +3,21 @@ import Songs from './Songs';
 
 export default function Station(props) {
 
-  console.log(props)
-  const station = props.genre;
+  const genre = props.genre;
+  const songs = props.songs;
+  const isPlaying = props.isPlaying;
+  const currentSong = props.currentSong;
+  const toggleOne = props.toggleOne;
+
   return (
     <div>
-      <h3>{ station.name }</h3>
-      {/*<Songs {...props} songs={station.songs}/>
-      { station.songs && !station.songs.length && <small>No songs.</small> */}
+      <h3>{ genre }</h3>
+        <Songs
+          songs={songs}
+          currentSong={currentSong}
+          isPlaying={isPlaying}
+          toggleOne={toggleOne}
+        />
       <hr />
     </div>
   );
