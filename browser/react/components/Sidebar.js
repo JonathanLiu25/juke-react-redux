@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
-export default function Sidebar (props) {
+export default function Sidebar(props) {
 
   const playlists = props.playlists;
 
@@ -13,16 +13,25 @@ export default function Sidebar (props) {
           <Link to='/albums'>ALBUMS</Link>
         </h4>
       </section>
+
       <section>
         <h4 className="menu-item">
           <Link to='/artists'>ARTISTS</Link>
         </h4>
       </section>
+
       <section>
         <h4 className="menu-item">
           <Link to='/lyrics'>LYRICS</Link>
         </h4>
       </section>
+
+      <section>
+        <h4 className="menu-item">
+          <Link to='/stations'>STATIONS</Link>
+        </h4>
+      </section>
+
       <hr />
       <section>
         <h4 className="text-muted">PLAYLISTS</h4>
