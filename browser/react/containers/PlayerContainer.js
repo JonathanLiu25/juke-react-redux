@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import AUDIO from '../audio';
 import store from '../store';
-import {previous, next, setProgress, toggleSong} from '../action-creators/player';
+import { previous, next, setProgress, toggleSong } from '../action-creators/player';
 import Player from '../components/Player';
 
 class PlayerContainer extends Component {
@@ -52,5 +53,34 @@ class PlayerContainer extends Component {
   }
 
 }
+
+
+// AUDIO.addEventListener('ended', this.next);
+// AUDIO.addEventListener('timeupdate', () => {
+//   store.dispatch(setProgress(AUDIO.currentTime / AUDIO.duration));
+// });
+
+
+// const mapStateToProps = (state) => Object.assign({}, state)
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     next: () => {
+//       dispatch(next())
+//     },
+//     prev: () => {
+//       dispatch(previous())
+//     },
+//     toggle: (song, list) => {
+//       dispatch(toggleSong(song, list))
+//     },
+//     setProgress: (currentTime, duration) => {
+//       dispatch(setProgress(currentTime / duration))
+//     }
+//   }
+// }
+
+// const PlayerContainer = connect(mapStateToProps, mapDispatchToProps)(Player)
+
 
 export default PlayerContainer;

@@ -1,30 +1,23 @@
-import React, {Component} from 'react';
-import store from '../store';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 import Lyrics from '../components/Lyrics';
 
-import {searchLyrics} from '../action-creators/lyrics';
+import { searchLyrics } from '../action-creators/lyrics';
 
-class LyricsContainer extends Component {
+class LyricsWrapper extends Component {
 
-  constructor() {
-
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = Object.assign({
       artistQuery: '',
       songQuery: ''
-    }, store.getState());
+    });
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleArtistInput = this.handleArtistInput.bind(this);
     this.handleSongInput = this.handleSongInput.bind(this);
 
-  }
-
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => {
-      this.setState(store.getState());
-    });
   }
 
   handleArtistInput(artist) {
@@ -38,26 +31,38 @@ class LyricsContainer extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.artistQuery && this.state.songQuery) {
-      store.dispatch(searchLyrics(this.state.artistQuery, this.state.songQuery));
+      this.props.lookForLyrics(this.state.artistQuery, this.state.songQuery)
     }
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
   }
 
   render() {
     return (
       <Lyrics
         {...this.state}
-        handleChange={this.handleChange}
         setArtist={this.handleArtistInput}
         setSong={this.handleSongInput}
-        handleSubmit={this.handleSubmit} />
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        lyrics={this.props.lyrics} />
     );
   }
 
 }
 
-export default LyricsContainer;
+const mapStateToProps = (state) => {
+  return {
+    lyrics: state.lyrics
+  }
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    lookForLyrics: (artistQuery, songQuery) => {
+      dispatch(searchLyrics(artistQuery, songQuery))
+    }
+  }
+}
+
+const LyricsContainer = connect(mapStateToProps, mapDispatchToProps)(LyricsWrapper)
+
+export default LyricsContainer;

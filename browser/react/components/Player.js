@@ -1,16 +1,23 @@
 import React from 'react';
 
-export default function Player (props) {
+import AUDIO from '../audio';
 
-  const currentSong = props.currentSong;
-  const isPlaying = props.isPlaying;
-  const progress = props.progress;
-  const prev = props.prev;
-  const toggle = props.toggle;
-  const next = props.next;
+export default class Player extends React.Component {
 
-  return (
-    <footer>
+  // componentDidMount() {
+  //   AUDIO.addEventListener('ended', this.props.next);
+  //   AUDIO.addEventListener('timeupdate', () => this.props.setProgress(AUDIO.currentTime / AUDIO.duration));
+  // }
+
+  render() {
+    const currentSong = this.props.currentSong;
+    const isPlaying = this.props.isPlaying;
+    const progress = this.props.progress;
+    const prev = this.props.prev;
+    const toggle = this.props.toggle;
+    const next = this.props.next;
+    return (
+      <footer>
       <div style={!currentSong.id ? {display: 'none'} : null}>
         <div className="pull-left">
           <button className="btn btn-default" onClick={prev}>
@@ -30,5 +37,6 @@ export default function Player (props) {
         </div>
       </div>
     </footer>
-  );
+    );
+  }
 };
